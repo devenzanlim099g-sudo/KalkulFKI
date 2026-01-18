@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Program Fungsi Komposisi & Invers</title>
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        background: rgba(0,0,0,0.35);
+        padding: 25px;
+        border-radius: 15px;
+        width: 400px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    input, select, button {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 8px;
+        border: none;
+        font-size: 16px;
+    }
+
+    button {
+        background: #00c6ff;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #00aaff;
+    }
+
+    .result {
+        background: rgba(255,255,255,0.15);
+        padding: 12px;
+        border-radius: 8px;
+        margin-top: 15px;
+        text-align: center;
+        font-size: 18px;
+        min-height: 40px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Program Fungsi Komposisi & Invers</h2>
+
+    <p>Masukkan f(x) = ax + b</p>
+    <input type="number" id="a" placeholder="a">
+    <input type="number" id="b" placeholder="b">
+
+    <p>Masukkan g(x) = cx + d</p>
+    <input type="number" id="c" placeholder="c">
+    <input type="number" id="d" placeholder="d">
+
+    <p>Pilih Menu</p>
+    <select id="pilihan">
+        <option value="1">Komposisi f(g(x))</option>
+        <option value="2">Komposisi g(f(x))</option>
+        <option value="3">Invers f(x)</option>
+        <option value="4">Invers g(x)</option>
+    </select>
+
+    <button onclick="hitung()">Hitung</button>
+
+    <div class="result" id="hasil">Hasil akan tampil di sini</div>
+</div>
+
+<script>
+function hitung() {
+    let a = parseFloat(document.getElementById("a").value);
+    let b = parseFloat(document.getElementById("b").value);
+    let c = parseFloat(document.getElementById("c").value);
+    let d = parseFloat(document.getElementById("d").value);
+    let pilihan = document.getElementById("pilihan").value;
+    let hasil = "";
+
+    if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
+        hasil = "Mohon isi semua nilai dengan benar";
+    }
+    else {
+        switch (pilihan) {
+            case "1":
+                hasil = `f(g(x)) = ${a * c}x + ${a * d + b}`;
+                break;
+
+            case "2":
+                hasil = `g(f(x)) = ${c * a}x + ${c * b + d}`;
+                break;
+
+            case "3":
+                if (a === 0)
+                    hasil = "Invers f(x) tidak ada (a = 0)";
+                else
+                    hasil = `f⁻¹(x) = (x - ${b}) / ${a}`;
+                break;
+
+            case "4":
+                if (c === 0)
+                    hasil = "Invers g(x) tidak ada (c = 0)";
+                else
+                    hasil = `g⁻¹(x) = (x - ${d}) / ${c}`;
+                break;
+        }
+    }
+
+    document.getElementById("hasil").innerText = hasil;
+}
+</script>
+
+</body>
+</html>
